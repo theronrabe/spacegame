@@ -1,1 +1,5 @@
-Hello World!
+Looks as though this works, now.
+
+Everything in the gameMachine directory is the framework, which
+can almost always be left untouched for now. Everything else
+uses that framework, and describes objects' event operations.

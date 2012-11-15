@@ -1,0 +1,27 @@
+To make a game using this engine, include game.h into your project.
+
+Example directory for a project using this engine (file descriptions below):
+myGameDirectory/
+	myGame.h
+	myGame.c
+	myFirstObject.h
+	myFirstObject.c
+	mySecondObject.h
+	mySecondObject.c
+	vShader
+	fShader
+	gameEngine/
+		game.h
+		game.c
+		events.h
+		events.c
+		objects.h
+		objects.c
+		access.h
+		access.c
+		files.h
+		files.c
+		Documentation
+	
+
+

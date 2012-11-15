@@ -1,0 +1,9 @@
+in vec3 position;
+in vec3 i_color;
+out vec3 o_color;
+
+void main() {
+	gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);
+	//gl_texCoord[0] = gl_MultiTexCoord0;
+	o_color = i_color;
+}

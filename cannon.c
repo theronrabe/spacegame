@@ -1,11 +1,12 @@
 void cannonCreate(Instance *this) {
 	//buildPrimitive(this, 6);
 	this->scale = 2;
+	glClearColor(0.05,0.05,0.05,1);
 }
 
 void cannonMouse(Instance *this) {
 	if(!instanceExists(pinball)) {
-		float velocity = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/500;
+		float velocity = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/32;
 		Instance *i = createInstance(pinball, 0, this->X, this->Y, this->Z, this->rotation, velocity);
 		i->scale = 5;
 		i->rotation = this->rotation;
@@ -21,7 +22,6 @@ void cannonStep(Instance *this) {
 
 void cannonDraw(Instance *this) {
 	seeWorld2D(0,0,800,600);
-	glClearColor(0.05,0.05,0.05,1);
 	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
 
 	/*

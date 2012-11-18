@@ -50,7 +50,7 @@ void level3() {
 
 	int i;
 	for(i=0;i<6;i++) {
-		createInstance(sizeUp, 0, 32*(i+4), 100, 0, 0, 0)->A = 1;
+		createInstance(sizeUp, 0, 32*(i+10), 100, 0, 0, 0)->A = 3;
 	}
 
 	createInstance(orb, 0, 80, 200, 0, 0, 0);

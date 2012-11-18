@@ -31,15 +31,10 @@ void loadShaders(char *vertShader, char *fragShader) {
         glAttachShader(_P,_F);
         glAttachShader(_P,_V);
 
-	/*
-	glBindAttribLocation(_P, 0, "in_Position");
-	glBindAttribLocation(_P, 1, "in_TexCoord0");
-	*/
-
         glLinkProgram(_P);
         glUseProgram(_P);
 	
-	//buildPrimitive();
+	buildPrimitive();
 }
 
 void createWindow(char *title, int x, int y, int w, int h) {
@@ -76,19 +71,6 @@ void buildPrimitive() {
 
 	glBindVertexArray(0);
 	_SAMPLER_LOC = glGetUniformLocation(_P, "baseMap");
-}
-
-void drawPrimitive(Instance *I, char glType, int first, int count) {
-	GLuint *VAO = I->VAO;
-	glBindVertexArray(VAO[0]);
-	glBindTexture(GL_TEXTURE_2D, I->A);
-	glPushMatrix();
-		glTranslatef(I->X, I->Y, I->Z);
-		glRotatef(I->rotation, 0,0,1);
-		glScalef(I->scale, I->scale, I->scale);
-		glDrawArrays(glType, first, count);
-	glPopMatrix();
-	glBindVertexArray(0);
 }
 
 GLuint newImage(char *fn) {
@@ -128,15 +110,4 @@ void drawImagePoints(GLuint image, int x1, int y1, int z1, int x2, int y2, int z
 		glVertex3i(x2-x1,0,z2-z1);
 	glEnd();
 	glPopMatrix();
-}
-void drawPrimitiveAt(Instance *i, char glType, float x, float y, float z, float scale, float rotation, int first, int count) {
-	GLuint *VAO = i->VAO;
-	glBindVertexArray(VAO[0]);
-	glPushMatrix();
-		glTranslatef(x, y, z);
-		glRotatef(rotation, 0,0,1);
-		glScalef(scale, scale, scale);
-		glDrawArrays(glType, first, count);
-	glPopMatrix();
-	glBindVertexArray(0);
 }

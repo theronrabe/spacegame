@@ -20,8 +20,8 @@ void orbDraw(Instance *this) {
 
 	if(ball) {
 		if(ball->OBJ == pinball) {
-			float dist = distance(this->X, this->Y, ball->X, ball->Y);
-			float grav = (ball->scale*this->scale)/4/pow(dist, 2);
+			float dist = distanceSq(this->X, this->Y, ball->X, ball->Y);
+			float grav = (ball->scale*this->scale)*50/dist;
 			if(this->C)
 				grav = -grav;
 
@@ -29,6 +29,5 @@ void orbDraw(Instance *this) {
 			ball->yVelocity += (ball->Y > this->Y)?-grav:grav;
 		}
 	}
-	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
 	drawImage(imgOrb, this->X, this->Y, this->scale, this->scale, 0);
 }

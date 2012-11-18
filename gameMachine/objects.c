@@ -39,8 +39,6 @@ Instance* createInstance(Object *obj, int dataSize, int x, int y, int z, float d
 	newInst->xVelocity = cos(direction*PI/180) * velocity;
 	newInst->yVelocity = sin(direction*PI/180) * velocity;
 	newInst->scale = 1;
-	newInst->VAO[0] = 0;
-	newInst->VBO[0] = 0; newInst->VBO[1] = 0; newInst->VBO[2] = 0;
 	
 	while(i){
 		if(GAME.instCount <= i->id) {
@@ -120,11 +118,6 @@ void swapDATA(Instance *I, void *d) {
 	I->DATA = d;
 }
 
-void setObjectPrimitive(Object *obj, GLfloat *verts[][3], GLfloat *cols[][3]) {
-	obj->Port[0] = verts;
-	obj->Port[1] = cols;
-}
-
 char instanceExists(Object *obj) {
 	Instance *i = GAME.headInst;
 	
@@ -138,10 +131,10 @@ char instanceExists(Object *obj) {
 
 Instance *nearInstance(Instance *this, Object *obj) {
 	Instance *i = GAME.headInst, *ret = i;
-	float n=999, in;
+	float n=999999, in;
 
 	while(i) {
-		in = distance(this->X, this->Y, i->X, i->Y);
+		in = distanceSq(this->X, this->Y, i->X, i->Y);
 		if(in<n) {
 			n = in;
 			ret = i;

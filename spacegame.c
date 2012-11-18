@@ -37,32 +37,6 @@ void bounceDraw(Instance *this);
 void oscCreate(Instance *this);
 void oscStep(Instance *this);
 
-//Primitives
-/*
-GLfloat basicTexCos[] = {-1,-1, 1,-1, 1,1, -1,1};
-GLfloat basicTexPos[] = {-1,-1,0, 1,-1,0, 1,1,0, -1,1,0};
-
-GLfloat bouncePrim[] = {0,-1,0, 0,1,0, 1,-2,0, 1,2,0, 2,-3,0, 2,3,0};
-GLfloat bounceCols[] = {1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1};
-GLfloat basicPrim[] = {-1,-1,0, 1,-1,0, 1,1,0,
-			-1,-1,0, 1,1,0, -1,1,0};
-GLfloat shipPrim[] = {0,0,0, -10,20,0, 0,10,0,
-			0,0,0, 10,20,0, 0,10,0};
-GLfloat pinballCols[] = {1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1};
-GLfloat targetCols[] = {0,0,0.8, 0,0,0.8, 0,0,0.8, 
-			0,0,0.8, 0,0,0.8, 0,0.5,1};
-GLfloat orbCols[] = {0.8,0,0, 0.8,0,0, 0.8,0,0,
-			0.8,0,0, 0.8,0,0, 1,0,0.5};
-GLfloat antiorbCols[] = {0.8,0,0.8, 0.8,0,0.8, 0.8,0,0.8,
-			0.8,0,0.8, 0.8,0,0.8, 1,0,1};
-GLfloat cannonCols[] = {1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1};
-GLfloat mousePrim[] = {-1,0,0, 1,0,0,
-			0,1,0, 0,-1,0};
-GLfloat mouseCols[] = {1,0,0, 1,0,0, 1,0,0, 1,0,0};
-GLfloat sizeUpCols[] = {0,1,0, 0,1,0, 0,1,0, 0,1,0, 0,1,0, 0,1,0};
-GLfloat sizeDownCols[] = {1,1,0, 1,1,0, 1,1,0, 1,1,0, 1,1,0, 1,1,0};
-*/
-
 //Global Data
 Instance *ball, *myBounce, *oscillator;
 int ammo = 10;
@@ -77,6 +51,7 @@ funPtr levels[] = {level0, level1, level2, level3, level4, level5, level6, level
 
 void startGame(int argc, char **argv) {
 	GAME.STEPTIME = 100;
+	GAME.FRAMERATE = 20;
 	createWindow("", 180, 180, 800, 600);
 	glutSetCursor(GLUT_CURSOR_NONE);
 	cannon = createObject();

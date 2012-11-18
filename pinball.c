@@ -34,9 +34,12 @@ void pinballStep(Instance *this) {
 }
 
 void pinballDraw(Instance *this) {
-	drawImage(imgWall, this->X, this->Y, this->scale, this->scale, this->rotation);
+	this->X += this->xVelocity;
+	this->Y += this->yVelocity;
 
-	if(getInstanceSpeed(this) > 6) setInstanceSpeed(this, 6);
+	drawImage(imgPinball, this->X, this->Y, this->scale, this->scale, this->rotation);
+
+	if(getInstanceSpeed(this) > 20) setInstanceSpeed(this, 20);
 	Instance *other;
 	if(other = collide(this, wall)) {
 		moveBounce(this, other);

@@ -4,5 +4,5 @@ void oscCreate(Instance *this) {
 
 void oscStep(Instance *this) {
 	++this->radius;
-	this->A = (this->radius>0x8FFFFFFF);
+	this->A = (this->radius%100)>50;
 }

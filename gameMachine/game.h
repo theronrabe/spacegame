@@ -28,18 +28,17 @@ typedef struct {
 	float xVelocity;
 	float yVelocity;
 	float scale;
-	GLuint VAO[2], VBO[3];
 } Instance;
 typedef void (*Script)(Instance *);
 typedef void (*funPtr)();
 typedef struct {
 	Script onCreate, onDraw, onStep, onKeyUp, onKeyDown, onMouseLeft, onMouseRight, onDestroy;
 	void *PREV;
-	void *Port[20];
 } Object;
 typedef Script (*Event)(Object *);
 typedef struct {
 	int STEPTIME;
+	int FRAMERATE;
 	char KEYS[256];
 	Instance *headInst, *tailInst;
 	Object *headObj;

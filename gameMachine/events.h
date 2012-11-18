@@ -1,6 +1,7 @@
 //Natural Events
 void Draw();
 void Step();
+void Move(int);
 void KeyUp(unsigned char key, int x, int y);
 void KeyDown(unsigned char key, int x, int y);
 void Mouse(int button, int state, int x, int y);

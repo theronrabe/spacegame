@@ -13,12 +13,11 @@ int main(int argc, char **argv) {
 	//Framework Stuff
 	createHeadInst();
 	startGame(argc, argv);
-	glutDisplayFunc(Draw);
-	glutIdleFunc(Draw);
 	glutKeyboardFunc(KeyDown);
 	glutKeyboardUpFunc(KeyUp);
 	glutMouseFunc(Mouse);
 	glutTimerFunc(GAME.STEPTIME, Step, 0);
+	glutTimerFunc(GAME.FRAMERATE, Draw, 0);
 	glutPassiveMotionFunc(moveMouse);
 
 	//Aaaaand... we're off!
@@ -28,36 +27,9 @@ int main(int argc, char **argv) {
 	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	buildPrimitive();
 	glutMainLoop();
 
 	return 0;
-}
-
-void Draw() {
-	//Prepare OpenGL
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	//Crank Engine!
-	triggerEvent(onDraw, GAME.headInst);
-
-	//update instance locations based on direction and velocity
-	Instance *i = GAME.headInst->NEXT;
-
-	while(i) {
-		/*
-		float xComp = cos(i->direction*3.14159265/180), yComp = sin(i->direction*3.14159265/180);
-		i->X += i->velocity*xComp;
-		i->Y += i->velocity*yComp;
-		*/
-		i->X += i->xVelocity;
-		i->Y += i->yVelocity;
-		i = i->NEXT;
-	}
-
-	glutSwapBuffers();
 }
 
 void moveMouse(int x, int y) {
@@ -76,6 +48,23 @@ void Mouse(int button, int state, int x, int y) {
 void Step(int x) {
 	glutTimerFunc(GAME.STEPTIME, Step, 0);
 	triggerEvent(onStep, GAME.headInst);
+}
+
+void Draw(int x) {
+	glutTimerFunc(GAME.FRAMERATE, Draw, 0);
+
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	triggerEvent(onDraw, GAME.headInst);
+	glutSwapBuffers();
+
+	Instance *i = GAME.headInst->NEXT;
+	while(i) {
+		i->X += i->xVelocity;
+		i->Y += i->yVelocity;
+		i = i->NEXT;
+	}
 }
 
 void KeyUp(unsigned char key, int x, int y) {

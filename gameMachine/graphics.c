@@ -31,11 +31,15 @@ void loadShaders(char *vertShader, char *fragShader) {
         glAttachShader(_P,_F);
         glAttachShader(_P,_V);
 
-	glBindAttribLocation(_P, 0, "position");
-	glBindAttribLocation(_P, 1, "color");
+	/*
+	glBindAttribLocation(_P, 0, "in_Position");
+	glBindAttribLocation(_P, 1, "in_TexCoord0");
+	*/
 
         glLinkProgram(_P);
         glUseProgram(_P);
+	
+	//buildPrimitive();
 }
 
 void createWindow(char *title, int x, int y, int w, int h) {
@@ -50,41 +54,34 @@ void seeWorld2D(int x1, int y1, int x2, int y2) {
 }
 
 void seeWorld3D(int cx, int cy, int cz, int fx, int fy, int fz, int vx, int vy, int vz) {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
 	gluLookAt(cx, cy, cz, fx, fy, fz, vx, vy, vz);
 }
 
-void buildPrimitive(Instance *I, int size) {
-	Object *obj = getObject(I);
-	GLuint *VAO = I->VAO, *VBO = I->VBO;
-	
-	glGenVertexArrays(1, &VAO[0]);
-	glBindVertexArray(VAO[0]);
-	glGenBuffers(2,VBO);
+void buildPrimitive() {
+	glGenVertexArrays(1, &_VAO[0]);
+	glBindVertexArray(_VAO[0]);
+	glGenBuffers(1,_VBO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
-	glBufferData(GL_ARRAY_BUFFER, 3*size*sizeof(GLfloat), obj->Port[dock_vertices], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_TRUE, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, _VBO[0]);
+	glBufferData(GL_ARRAY_BUFFER, 4*4*sizeof(GLfloat), _PRIM, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 16, 0);
 	glEnableVertexAttribArray(0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-	glBufferData(GL_ARRAY_BUFFER, 3*size*sizeof(GLfloat), obj->Port[dock_colors], GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 0, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 16, (void*)(sizeof(float)*2));
 	glEnableVertexAttribArray(1);
 
-	/*
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[2]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLint), obj->Port[dock_textured], GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 1, GL_INT, GL_FALSE, 0, 0);
-	*/
-
 	glBindVertexArray(0);
+	_SAMPLER_LOC = glGetUniformLocation(_P, "baseMap");
 }
 
 void drawPrimitive(Instance *I, char glType, int first, int count) {
 	GLuint *VAO = I->VAO;
 	glBindVertexArray(VAO[0]);
+	glBindTexture(GL_TEXTURE_2D, I->A);
 	glPushMatrix();
 		glTranslatef(I->X, I->Y, I->Z);
 		glRotatef(I->rotation, 0,0,1);
@@ -96,10 +93,42 @@ void drawPrimitive(Instance *I, char glType, int first, int count) {
 
 GLuint newImage(char *fn) {
 	GLuint ret = SOIL_load_OGL_texture(fn, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
-
-	return 0;
+	return ret;
 }
 
+void drawImage(GLuint image, int x1, int y1, int width, int height, float rotation) {
+	glBindVertexArray(_VAO[0]);
+	glUniform1i(_SAMPLER_LOC, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, image);
+
+	glPushMatrix();
+	glTranslatef(x1,y1,0);
+	glRotatef(rotation, 0,0,1);
+	glScalef(width, height, 1);
+	glDrawArrays(GL_QUADS, 0, 4);
+	glPopMatrix();
+
+	glBindVertexArray(0);
+}
+
+void drawImagePoints(GLuint image, int x1, int y1, int z1, int x2, int y2, int z2, float rotation) {
+	glBindTexture(GL_TEXTURE_2D, image);
+	glPushMatrix();
+	glTranslatef(x1,y1,z1);
+	glRotatef(rotation, 0,0,1);
+	glBegin(GL_QUADS);
+		glTexCoord2i(0,0);
+		glVertex3i(0,0,0);
+		glTexCoord2i(0,1);
+		glVertex3i(0,y2-y1,0);
+		glTexCoord2i(1,1);
+		glVertex3i(x2-x1,y2-y1,z2-z1);
+		glTexCoord2i(1,0);
+		glVertex3i(x2-x1,0,z2-z1);
+	glEnd();
+	glPopMatrix();
+}
 void drawPrimitiveAt(Instance *i, char glType, float x, float y, float z, float scale, float rotation, int first, int count) {
 	GLuint *VAO = i->VAO;
 	glBindVertexArray(VAO[0]);

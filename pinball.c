@@ -1,6 +1,7 @@
 void pinballCreate(Instance *this) {
-	buildPrimitive(this, 6);
 	this->radius = 5;
+	this->scale = 8;
+	this->A = imgPinball;
 }
 
 void moveBounce(Instance *this, Instance *other) {
@@ -33,10 +34,9 @@ void pinballStep(Instance *this) {
 }
 
 void pinballDraw(Instance *this) {
-	drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	drawImage(imgWall, this->X, this->Y, this->scale, this->scale, this->rotation);
 
 	if(getInstanceSpeed(this) > 6) setInstanceSpeed(this, 6);
-
 	Instance *other;
 	if(other = collide(this, wall)) {
 		moveBounce(this, other);

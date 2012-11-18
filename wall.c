@@ -1,5 +1,5 @@
 void wallCreate(Instance *this) {
-	buildPrimitive(this, 6);
+	//buildPrimitive(this, 6);
 	this->scale = 16;
 	this->radius = 24;
 	this->A = 0;
@@ -7,7 +7,8 @@ void wallCreate(Instance *this) {
 }
 
 void wallDraw(Instance *this) {
-	if(this->A) this->X += oscillator->xVelocity/this->A;
-	else if(this->B) this->Y += oscillator->xVelocity/this->B;
-	drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	if(this->A) this->xVelocity = oscillator->A*8;
+	else if(this->B) this->yVelocity = oscillator->A/8;
+	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	drawImage(imgWall, this->X, this->Y, 16, 16, 0);
 }

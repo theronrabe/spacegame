@@ -1,13 +1,13 @@
 void orbCreate(Instance *this) {
-	buildPrimitive(this, 6);
-	this->scale = 20;
+	//buildPrimitive(this, 6);
+	this->scale = 10;
 	this->radius = 20;
 	this->A = 0;
 	this->C = 0;
 }
 
 void antiorbCreate(Instance *this) {
-	buildPrimitive(this, 6);
+	//buildPrimitive(this, 6);
 	this->scale = 20;
 	this->radius = 20;
 	this->A = 0;
@@ -29,5 +29,6 @@ void orbDraw(Instance *this) {
 			ball->yVelocity += (ball->Y > this->Y)?-grav:grav;
 		}
 	}
-	drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	drawImage(imgOrb, this->X, this->Y, this->scale, this->scale, 0);
 }

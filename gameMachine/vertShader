@@ -1,9 +1,8 @@
-in vec3 position;
-in vec3 i_color;
-out vec3 o_color;
+in vec3 in_Position;
+in vec2 in_TexCoord0;
+out vec2 texCos; 
 
 void main() {
-	gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);
-	//gl_texCoord[0] = gl_MultiTexCoord0;
-	o_color = i_color;
+	gl_Position = ftransform();
+	texCos = in_TexCoord0;
 }

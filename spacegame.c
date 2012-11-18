@@ -1,8 +1,9 @@
 #include "gameMachine/game.h"
-#include <stdio.h>
 
 //Objects
 Object *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc;
+//Images
+GLint imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown;
 //Events
 void cannonCreate(Instance *this);
 void cannonStep(Instance *this);
@@ -37,6 +38,10 @@ void oscCreate(Instance *this);
 void oscStep(Instance *this);
 
 //Primitives
+/*
+GLfloat basicTexCos[] = {-1,-1, 1,-1, 1,1, -1,1};
+GLfloat basicTexPos[] = {-1,-1,0, 1,-1,0, 1,1,0, -1,1,0};
+
 GLfloat bouncePrim[] = {0,-1,0, 0,1,0, 1,-2,0, 1,2,0, 2,-3,0, 2,3,0};
 GLfloat bounceCols[] = {1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,1};
 GLfloat basicPrim[] = {-1,-1,0, 1,-1,0, 1,1,0,
@@ -56,6 +61,7 @@ GLfloat mousePrim[] = {-1,0,0, 1,0,0,
 GLfloat mouseCols[] = {1,0,0, 1,0,0, 1,0,0, 1,0,0};
 GLfloat sizeUpCols[] = {0,1,0, 0,1,0, 0,1,0, 0,1,0, 0,1,0, 0,1,0};
 GLfloat sizeDownCols[] = {1,1,0, 1,1,0, 1,1,0, 1,1,0, 1,1,0, 1,1,0};
+*/
 
 //Global Data
 Instance *ball, *myBounce, *oscillator;
@@ -89,59 +95,50 @@ void startGame(int argc, char **argv) {
 	cannon->onStep = cannonStep;
 	cannon->onDraw = cannonDraw;
 	cannon->onMouseLeft = cannonMouse;
-	cannon->Port[dock_vertices] = shipPrim;
-	cannon->Port[dock_colors] = cannonCols;
 
 	pinball->onCreate = pinballCreate;
 	pinball->onStep = pinballStep;
 	pinball->onDraw = pinballDraw;
-	pinball->Port[dock_vertices] = basicPrim;
-	pinball->Port[dock_colors] = pinballCols;
+	//pinball->Port[dock_vertices] = basicPrim;
+	//pinball->Port[dock_colors] = pinballCols;
 
 	target->onCreate = targetCreate;
 	target->onStep = targetStep;
 	target->onDraw = targetDraw;
-	target->Port[dock_vertices] = basicPrim;
-	target->Port[dock_colors] = targetCols;
 
 	orb->onCreate = orbCreate;
 	orb->onDraw = orbDraw;
-	orb->Port[dock_vertices] = basicPrim;
-	orb->Port[dock_colors] = orbCols;
 
 	antiorb->onCreate = antiorbCreate;
 	antiorb->onDraw = orbDraw;
-	antiorb->Port[dock_vertices] = basicPrim;
-	antiorb->Port[dock_colors] = antiorbCols;
 
 	mouse->onCreate = mouseCreate;
 	mouse->onStep = mouseStep;
 	mouse->onDraw = mouseDraw;
-	mouse->Port[dock_vertices] = mousePrim;
-	mouse->Port[dock_colors] = mouseCols;
 
 	wall->onCreate = wallCreate;
 	wall->onDraw = wallDraw;
-	wall->Port[dock_vertices] = basicPrim;
-	wall->Port[dock_colors] = pinballCols;
 
 	sizeUp->onCreate = wallCreate;
 	sizeUp->onDraw = wallDraw;
-	sizeUp->Port[dock_vertices] = basicPrim;
-	sizeUp->Port[dock_colors] = sizeUpCols;
 
 	sizeDown->onCreate = wallCreate;
 	sizeDown->onDraw = wallDraw;
-	sizeDown->Port[dock_vertices] = basicPrim;
-	sizeDown->Port[dock_colors] = sizeDownCols;
 
 	bounce->onCreate = bounceCreate;
 	bounce->onDraw = bounceDraw;
-	bounce->Port[dock_vertices] = bouncePrim;
-	bounce->Port[dock_colors] = bounceCols;
 
 	osc->onCreate = oscCreate;
-	osc->onStep = oscStep;
+	osc->onDraw = oscStep;
+
+	imgCannon = newImage("img/ship.png");
+	imgPinball = newImage("img/rocket.png");
+	imgTarget = newImage("img/target.png");
+	imgOrb = newImage("img/blackhole.png");
+	imgWall = newImage("img/wall.png");
+	imgSizeUp = newImage("img/circuit.png");
+	imgSizeDown = newImage("img/checker.png");
+	imgMouse = newImage("img/mouse.png");
 
 	/*
 	myBounce = createInstance(bounce, 0, 0, 0, 0, 0, 0);

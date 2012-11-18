@@ -1,5 +1,5 @@
 void targetCreate(Instance *this) {
-	buildPrimitive(this, 6);
+	//buildPrimitive(this, 6);
 	this->scale = 20;
 	this->radius = 50;
 }
@@ -13,6 +13,7 @@ void targetStep(Instance *this) {
 }
 
 void targetDraw(Instance *this) {
-	drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
+	drawImage(imgTarget, this->X, this->Y, 16, 16, 0);
 }
 

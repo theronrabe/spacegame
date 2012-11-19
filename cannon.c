@@ -1,7 +1,6 @@
 void cannonCreate(Instance *this) {
 	//buildPrimitive(this, 6);
 	this->scale = 2;
-	glClearColor(0.05,0.05,0.05,1);
 }
 
 void cannonMouse(Instance *this) {
@@ -21,7 +20,6 @@ void cannonStep(Instance *this) {
 }
 
 void cannonDraw(Instance *this) {
-	seeWorld2D(0,0,800,600);
 	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
 
 	/*
@@ -31,7 +29,8 @@ void cannonDraw(Instance *this) {
 	}
 	*/
 
-	drawImage(imgCannon, this->X, this->Y, 16, 16, this->rotation);
+	float stretch = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/4;
+	drawImage(imgCannon, this->X, this->Y, stretch, 16, this->rotation);
 
 	if(keyIsHeld('q')) endGame();
 }

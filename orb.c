@@ -29,5 +29,5 @@ void orbDraw(Instance *this) {
 			ball->yVelocity += (ball->Y > this->Y)?-grav:grav;
 		}
 	}
-	drawImage(imgOrb, this->X, this->Y, this->scale, this->scale, 0);
+	drawImage(imgOrb, this->X, this->Y, this->scale*2, this->scale*2, 0);
 }

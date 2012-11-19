@@ -45,7 +45,7 @@ void createWindow(char *title, int x, int y, int w, int h) {
 
 void seeWorld2D(int x1, int y1, int x2, int y2) {
 	glMatrixMode(GL_PROJECTION);
-	glOrtho(x1, x2, y2, y1, -1, 100);
+	glOrtho(x1, x2, y2, y1, 0, 100);
 }
 
 void seeWorld3D(int cx, int cy, int cz, int fx, int fy, int fz, int vx, int vy, int vz) {

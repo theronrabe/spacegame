@@ -36,6 +36,7 @@ void bounceDraw(Instance *this);
 
 void oscCreate(Instance *this);
 void oscStep(Instance *this);
+void oscDraw(Instance *this);
 
 //Global Data
 Instance *ball, *myBounce, *oscillator;
@@ -104,7 +105,7 @@ void startGame(int argc, char **argv) {
 	bounce->onDraw = bounceDraw;
 
 	osc->onCreate = oscCreate;
-	osc->onDraw = oscStep;
+	osc->onDraw = oscDraw;
 
 	imgCannon = newImage("img/ship.png");
 	imgPinball = newImage("img/rocket.png");
@@ -115,14 +116,11 @@ void startGame(int argc, char **argv) {
 	imgSizeDown = newImage("img/checker.png");
 	imgMouse = newImage("img/mouse.png");
 
-	/*
-	myBounce = createInstance(bounce, 0, 0, 0, 0, 0, 0);
-	myBounce->scale = 5;
-	*/
-
-	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);
 	
+	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);
 	nextLevel();
+	myBounce = createInstance(bounce, 0, 0, 0, 0, 0, 0);
+		myBounce->scale = 4;
 }
 
 void nextLevel() {
@@ -136,13 +134,9 @@ void nextLevel() {
 		wipeInstances(orb);
 		wipeInstances(sizeUp);
 		wipeInstances(sizeDown);
-		wipeInstances(mouse);
-		wipeInstances(bounce);
 	}
-	levels[level++]();
-	myBounce = createInstance(bounce, 0, 0, 0, 0, 0, 0);
-		myBounce->scale = 4;
 	createInstance(mouse, 0, 0, 0, 0, 0, 0);
+	levels[level++]();
 }
 
 #include "mouse.c"

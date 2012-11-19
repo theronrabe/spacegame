@@ -10,10 +10,12 @@ void targetStep(Instance *this) {
 		destroyInstance(ball);
 		nextLevel();
 	}
+	int r = direction(this->X, this->Y, GAME.mouseX, GAME.mouseY);
+	this->rotation = r;
 }
 
 void targetDraw(Instance *this) {
 	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
-	drawImage(imgTarget, this->X, this->Y, 16, 16, 0);
+	drawImage(imgTarget, this->X, this->Y, 16, 16, this->rotation);
 }
 

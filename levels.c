@@ -11,8 +11,11 @@ void level0() {
 	createInstance(cannon, 0, 150, 450, 0, 0, 0);
 
 	makeStrech(wall, 16, 16, 32, 0, 800/32);
+	printf("tail->PREV: %p\n", GAME.tailInst->PREV);
 	makeStrech(wall, 800-16, 16, 0, 32, 600/32);
+	printf("tail->PREV: %p\n", GAME.tailInst->PREV);
 	makeStrech(wall, 16, 600-16, 32, 0, 800/32);
+	printf("tail->PREV: %p\n", GAME.tailInst->PREV);
 
 	createInstance(target, 0, 700, 300, 0, 0, 0);
 }
@@ -79,9 +82,11 @@ void level4() {
 void level5() {
 	createInstance(cannon, 0, 80, 300, 0, 0, 0);
 	
-	createInstance(antiorb, 0, 400, 40, 0, 0, 0);
-	createInstance(antiorb, 0, 400, 560, 0, 0, 0);
-	createInstance(orb, 0, 200, 300, 0, 0, 0);
+	createInstance(antiorb, 0, 60, 60, 0, 0, 0);
+	createInstance(antiorb, 0, 740, 200, 0, 0, 0);
+	createInstance(antiorb, 0, 60, 540, 0, 0, 0);
+	createInstance(antiorb, 0, 740, 400, 0, 0, 0);
+	createInstance(orb, 0, 400, 300, 0, 0, 0);
 
 	createInstance(target, 0, 720, 300, 0, 0, 0);
 }

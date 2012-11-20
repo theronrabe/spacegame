@@ -5,7 +5,8 @@ void cannonCreate(Instance *this) {
 
 void cannonMouse(Instance *this) {
 	if(!instanceExists(pinball)) {
-		float velocity = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/32;
+		float velocity = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/64;
+		velocity = (velocity>6)?6:velocity;
 		Instance *i = createInstance(pinball, 0, this->X, this->Y, this->Z, this->rotation, velocity);
 		i->scale = 5;
 		i->rotation = this->rotation;

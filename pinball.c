@@ -39,7 +39,7 @@ void pinballDraw(Instance *this) {
 
 	drawImage(imgPinball, this->X, this->Y, this->scale, this->scale, this->rotation);
 
-	if(getInstanceSpeed(this) > 20) setInstanceSpeed(this, 20);
+	if(getInstanceSpeed(this) > 15) setInstanceSpeed(this, 15);
 	Instance *other;
 	if(other = collide(this, wall)) {
 		moveBounce(this, other);

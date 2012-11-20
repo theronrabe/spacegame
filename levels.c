@@ -67,16 +67,16 @@ void level4() {
 	makeStrech(wall, 16, 16, 32, 0, 800/32);
 	makeStrech(wall, 800-16, 16, 0, 32, 600/32+1);
 
-	createInstance(sizeDown, 0, 32*10+16, 32*3+16, 0, 0, 0)->B = 5;
-	createInstance(sizeDown, 0, 32*10+16, 32*6+16, 0, 0, 0)->B = 5;
-	createInstance(sizeDown, 0, 32*10+16, 32*10+16, 0, 0, 0)->B = 5;
+	createInstance(sizeDown, 1, 32*10+16, 32*3+16, 0, 0, 0);
+	createInstance(sizeDown, 0, 32*10+16, 32*6+16, 0, 0, 0);
+	createInstance(sizeDown, 0, 32*10+16, 32*10+16, 0, 0, 0);
+	createInstance(sizeDown, 0, 32*10+16, 32*5+16, 0, 0, 0);
 	createInstance(sizeDown, 0, 32*14+16, 32*4+16, 0, 0, 0)->B = 4;
 	createInstance(sizeDown, 0, 32*14+16, 32*8+16, 0, 0, 0)->B = 4;
 	createInstance(sizeDown, 0, 32*14+16, 32*12+16, 0, 0, 0)->B = 4;
 
-	createInstance(orb, 0, 200, 400, 0, 0, 0)->scale = 65;
-
 	createInstance(target, 0, 200, 270, 0, 0, 0);
+	createInstance(orb, 0, 200, 400, 0, 0, 0)->scale = 65;
 }
 
 void level5() {

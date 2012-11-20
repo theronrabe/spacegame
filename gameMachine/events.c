@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
 	glutTimerFunc(GAME.STEPTIME, Step, 0);
 	glutTimerFunc(GAME.FRAMERATE, Draw, 0);
 	glutPassiveMotionFunc(moveMouse);
+	glutIdleFunc(Idle);
 
 	//Aaaaand... we're off!
 	loadShaders("gameMachine/vertShader", "gameMachine/fragShader");
@@ -67,6 +68,10 @@ void Draw(int x) {
 	}
 }
 
+void Idle() {
+	triggerEvent(onIdle, GAME.headInst);
+}
+
 void KeyUp(unsigned char key, int x, int y) {
 	GAME.KEYS[key] = 0;
 	triggerEvent(onKeyUp, GAME.headInst);
@@ -106,6 +111,10 @@ Script onMouseRight(Object *obj) {
 }
 Script onDestroy(Object *obj) {
 	return obj->onDestroy;
+}
+
+Script onIdle(Object *obj) {
+	return obj->onIdle;
 }
 
 void endGame() {

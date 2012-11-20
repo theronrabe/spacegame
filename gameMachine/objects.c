@@ -17,6 +17,7 @@ Object* createObject() {
 	newObj->onMouseLeft = NULL;
 	newObj->onMouseRight = NULL;
 	newObj->onDestroy = NULL;
+	newObj->onIdle = NULL;
 
 	newObj->PREV = GAME.headObj;
 	GAME.headObj = newObj;

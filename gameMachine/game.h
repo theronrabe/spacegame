@@ -32,7 +32,7 @@ typedef struct {
 typedef void (*Script)(Instance *);
 typedef void (*funPtr)();
 typedef struct {
-	Script onCreate, onDraw, onStep, onKeyUp, onKeyDown, onMouseLeft, onMouseRight, onDestroy;
+	Script onCreate, onDraw, onStep, onKeyUp, onKeyDown, onMouseLeft, onMouseRight, onDestroy, onIdle;
 	void *PREV;
 } Object;
 typedef Script (*Event)(Object *);

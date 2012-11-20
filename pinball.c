@@ -1,5 +1,5 @@
 void pinballCreate(Instance *this) {
-	this->radius = 5;
+	this->radius = 8;
 	this->scale = 8;
 	this->A = imgPinball;
 }
@@ -8,18 +8,18 @@ void moveBounce(Instance *this, Instance *other) {
 		myBounce->X = this->X;
 		myBounce->Y = this->Y;
 		myBounce->radius = 150;
-		if(this->Y>other->Y && this->X>other->X-16 && this->X<other->X+16) {
+		if(this->Y>=other->Y && this->X>=other->X-16 && this->X<=other->X+16) {
 			myBounce->rotation = 90;
-			this->yVelocity *= -0.7; this->Y += 10; } //bottom side
-		if(this->Y<other->Y && this->X>other->X-16 && this->X<other->X+16) {
+			this->yVelocity *= -0.7; this->Y += 16; } //bottom side
+		else if(this->Y<=other->Y && this->X>=other->X-16 && this->X<=other->X+16) {
 			myBounce->rotation = 270;
-			this->Y -= 10; this->yVelocity *= -0.7; } //top side
-		if(this->X>other->X && this->Y>other->Y-16 && this->Y<other->Y+16) {
+			this->Y -= 16; this->yVelocity *= -0.7; } //top side
+		else if(this->X>=other->X && this->Y>=other->Y-16 && this->Y<=other->Y+16) {
 			myBounce->rotation = 0;
-			this->xVelocity *= -0.7; this->X += 10; } //right side
-		if(this->X<other->X && this->Y>other->Y-16 && this->Y<other->Y+16) {
+			this->xVelocity *= -0.7; this->X += 16; } //right side
+		else if(this->X<=other->X && this->Y>=other->Y-16 && this->Y<=other->Y+16) {
 			myBounce->rotation = 180;
-			this->xVelocity *= -0.7; this->X -= 10; } //left side
+			this->xVelocity *= -0.7; this->X -= 16; } //left side
 }
 
 void pinballStep(Instance *this) {

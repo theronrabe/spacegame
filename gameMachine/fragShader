@@ -4,5 +4,9 @@ in vec2 texCos;
 out vec4 out_color;
 
 void main() {
-	out_color = texture2D(baseMap, texCos);
+	vec4 col = texture2D(baseMap, texCos);
+	if (col.a == 0)
+		discard;
+	else
+		out_color = col;
 }

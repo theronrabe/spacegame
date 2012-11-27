@@ -48,6 +48,7 @@ typedef struct {
 
 //Data Declarations
 Game GAME;
+int flagDraw = 0;
 
 #include "graphics.h"
 #include "events.h"

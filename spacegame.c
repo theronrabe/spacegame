@@ -3,7 +3,7 @@
 //Objects
 Object *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc;
 //Images
-GLint imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown;
+GLint imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb;
 //Events
 void cannonCreate(Instance *this);
 void cannonStep(Instance *this);
@@ -35,7 +35,7 @@ void bounceCreate(Instance *this);
 void bounceDraw(Instance *this);
 
 void oscCreate(Instance *this);
-void oscStep(Instance *this);
+void oscIdle(Instance *this);
 void oscDraw(Instance *this);
 
 //Global Data
@@ -75,8 +75,6 @@ void startGame(int argc, char **argv) {
 	pinball->onCreate = pinballCreate;
 	pinball->onStep = pinballStep;
 	pinball->onDraw = pinballDraw;
-	//pinball->Port[dock_vertices] = basicPrim;
-	//pinball->Port[dock_colors] = pinballCols;
 
 	target->onCreate = targetCreate;
 	target->onStep = targetStep;
@@ -106,6 +104,7 @@ void startGame(int argc, char **argv) {
 
 	osc->onCreate = oscCreate;
 	osc->onDraw = oscDraw;
+	osc->onIdle = oscIdle;
 
 	imgCannon = newImage("img/ship.png");
 	imgPinball = newImage("img/rocket.png");
@@ -115,6 +114,7 @@ void startGame(int argc, char **argv) {
 	imgSizeUp = newImage("img/circuit.png");
 	imgSizeDown = newImage("img/checker.png");
 	imgMouse = newImage("img/mouse.png");
+	imgAntiOrb = newImage("img/whitehole.png");
 
 	
 	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);
@@ -125,13 +125,14 @@ void startGame(int argc, char **argv) {
 
 void nextLevel() {
 	oscillator->radius = 0;
-	oscillator->xVelocity = 0;
+	oscillator->A = 0;
 
 	if(level) {
 		wipeInstances(cannon);
 		wipeInstances(target);
 		wipeInstances(wall);
 		wipeInstances(orb);
+		wipeInstances(antiorb);
 		wipeInstances(sizeUp);
 		wipeInstances(sizeDown);
 	}

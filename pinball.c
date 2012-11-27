@@ -34,8 +34,10 @@ void pinballStep(Instance *this) {
 }
 
 void pinballDraw(Instance *this) {
+/*
 	this->X += this->xVelocity;
 	this->Y += this->yVelocity;
+*/
 
 	drawImage(imgPinball, this->X, this->Y, this->scale, this->scale, this->rotation);
 

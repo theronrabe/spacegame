@@ -1,6 +1,3 @@
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
 //Drawing Structures 
 struct _VERTEX { float x,y,s,t; };
 struct _VERTEX _PRIM[] = {-1,-1,0,0, 1,-1,1,0, 1,1,1,1, -1,1,0,1};

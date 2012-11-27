@@ -5,8 +5,8 @@ void cannonCreate(Instance *this) {
 
 void cannonMouse(Instance *this) {
 	if(!instanceExists(pinball)) {
-		float velocity = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/64;
-		velocity = (velocity>6)?6:velocity;
+		float velocity = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/32;
+		velocity = (velocity>15)?15:velocity;
 		Instance *i = createInstance(pinball, 0, this->X, this->Y, this->Z, this->rotation, velocity);
 		i->scale = 5;
 		i->rotation = this->rotation;
@@ -21,15 +21,6 @@ void cannonStep(Instance *this) {
 }
 
 void cannonDraw(Instance *this) {
-	//drawPrimitive(this, GL_TRIANGLES, 0, 6);
-
-	/*
-	int i;
-	for(i=0;i<ammo;i++) {
-		drawPrimitiveAt(this, GL_TRIANGLES, i*8+40, 40, 0, 0.5, 0, 0, 6);
-	}
-	*/
-
 	float stretch = distance(this->X, this->Y, GAME.mouseX, GAME.mouseY)/4;
 	drawImage(imgCannon, this->X, this->Y, stretch, 16, this->rotation);
 

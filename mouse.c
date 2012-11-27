@@ -14,7 +14,6 @@ void mouseDraw(Instance *this) {
 	//glColor3f(1,1,1);
 	//drawImage(this->A, this->X, this->Y, 0, this->X+100, this->Y+100, 0);
 
-	glClearColor(0.08,0.08,0.08,1);
 	drawImage(imgMouse, this->X, this->Y, 8, 8, 0);
 }
 

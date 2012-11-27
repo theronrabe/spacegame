@@ -2,7 +2,7 @@
 void Draw();
 void Step();
 void Idle();
-void Move(int);
+void FPS(int);
 void KeyUp(unsigned char key, int x, int y);
 void KeyDown(unsigned char key, int x, int y);
 void Mouse(int button, int state, int x, int y);

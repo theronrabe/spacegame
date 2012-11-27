@@ -17,13 +17,14 @@ int main(int argc, char **argv) {
 	glutKeyboardUpFunc(KeyUp);
 	glutMouseFunc(Mouse);
 	glutTimerFunc(GAME.STEPTIME, Step, 0);
-	glutTimerFunc(GAME.FRAMERATE, Draw, 0);
+	glutDisplayFunc(Draw);
+	glutTimerFunc(GAME.FRAMERATE, FPS, 0);
 	glutPassiveMotionFunc(moveMouse);
-	glutIdleFunc(Idle);
+	//glutIdleFunc(Draw);
 
 	//Aaaaand... we're off!
 	loadShaders("gameMachine/vertShader", "gameMachine/fragShader");
-	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA|GLUT_DEPTH|GLUT_STENCIL);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
@@ -51,21 +52,30 @@ void Step(int x) {
 	triggerEvent(onStep, GAME.headInst);
 }
 
-void Draw(int x) {
-	glutTimerFunc(GAME.FRAMERATE, Draw, 0);
-
+void Draw() {
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	triggerEvent(onDraw, GAME.headInst);
+	glFlush();
 	glutSwapBuffers();
+	
+	//if(flagDraw) {
+		Instance *i = GAME.headInst->NEXT;
+		while(i) {
+			i->X += i->xVelocity;
+			i->Y += i->yVelocity;
+			i = i->NEXT;
+		}
+	//}
+	flagDraw = 0;
+}
 
-	Instance *i = GAME.headInst->NEXT;
-	while(i) {
-		i->X += i->xVelocity;
-		i->Y += i->yVelocity;
-		i = i->NEXT;
-	}
+void FPS(int x) {
+	glutTimerFunc(GAME.FRAMERATE, FPS, 0);
+	//flagDraw = 1;
+	//triggerEvent(onIdle, GAME.headInst);
+	glutPostRedisplay();
 }
 
 void Idle() {

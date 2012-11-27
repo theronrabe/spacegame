@@ -53,7 +53,7 @@ void level3() {
 
 	int i;
 	for(i=0;i<6;i++) {
-		createInstance(sizeUp, 0, 32*(i+10), 100, 0, 0, 0)->A = 3;
+		createInstance(sizeUp, 0, 32*(i+10), 100, 0, 0, 0)->A = 4;
 	}
 
 	createInstance(orb, 0, 80, 200, 0, 0, 0);
@@ -92,7 +92,15 @@ void level5() {
 }
 
 void level6() {
+	createInstance(cannon, 0, 400, 560, 0, 0, 0);
+	createInstance(target, 0, 400, 200, 0, 0, 0);
 
+	makeStrech(wall, 32*6+16, 300, 32, 0, 800/32-12);
+
+	createInstance(antiorb, 0, 50, 50, 0, 0, 0);
+	createInstance(antiorb, 0, 750, 50, 0, 0, 0);
+	createInstance(orb, 0, 32*8+16, 340, 0, 0, 0);
+	createInstance(orb, 0, 32*16+16, 340, 0, 0, 0);
 }
 
 void level7() {

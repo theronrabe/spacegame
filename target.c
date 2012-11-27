@@ -10,7 +10,12 @@ void targetStep(Instance *this) {
 		destroyInstance(ball);
 		nextLevel();
 	}
-	int r = direction(this->X, this->Y, GAME.mouseX, GAME.mouseY);
+	int r;
+	if(ball) {
+		r = direction(this->X, this->Y, ball->X, ball->Y);
+	} else {
+		r = direction(this->X, this->Y, GAME.mouseX, GAME.mouseY);
+	}
 	this->rotation = r;
 }
 

@@ -107,14 +107,23 @@ void startGame(int argc, char **argv) {
 	osc->onIdle = oscIdle;
 
 	imgCannon = newImage("img/ship.png");
+		printf("imgCannon id\t:\t%d\n", imgCannon);
 	imgPinball = newImage("img/rocket.png");
+		printf("imgPinball id\t:\t%d\n", imgPinball);
 	imgTarget = newImage("img/target.png");
+		printf("imgTarget id\t:\t%d\n", imgTarget);
 	imgOrb = newImage("img/blackhole.png");
+		printf("imgOrb id\t:\t%d\n", imgOrb);
 	imgWall = newImage("img/wall.png");
+		printf("imgWall id\t:\t%d\n", imgWall);
 	imgSizeUp = newImage("img/circuit.png");
+		printf("imgSizeUp id\t:\t%d\n", imgSizeUp);
 	imgSizeDown = newImage("img/checker.png");
+		printf("imgSizeDown id\t:\t%d\n", imgSizeDown);
 	imgMouse = newImage("img/mouse.png");
+		printf("imgMouse id\t:\t%d\n", imgMouse);
 	imgAntiOrb = newImage("img/whitehole.png");
+		printf("imgAntiOrb id\t:\t%d\n", imgAntiOrb);
 
 	
 	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);

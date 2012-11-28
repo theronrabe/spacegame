@@ -11,11 +11,8 @@ void level0() {
 	createInstance(cannon, 0, 150, 450, 0, 0, 0);
 
 	makeStrech(wall, 16, 16, 32, 0, 800/32);
-	printf("tail->PREV: %p\n", GAME.tailInst->PREV);
 	makeStrech(wall, 800-16, 16, 0, 32, 600/32);
-	printf("tail->PREV: %p\n", GAME.tailInst->PREV);
 	makeStrech(wall, 16, 600-16, 32, 0, 800/32);
-	printf("tail->PREV: %p\n", GAME.tailInst->PREV);
 
 	createInstance(target, 0, 700, 300, 0, 0, 0);
 }

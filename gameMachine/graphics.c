@@ -74,7 +74,7 @@ void buildPrimitive() {
 }
 
 GLuint newImage(char *fn) {
-	GLuint ret = SOIL_load_OGL_texture(fn, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
+	GLuint ret = SOIL_load_OGL_texture(fn, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS|SOIL_FLAG_POWER_OF_TWO);
 	return ret;
 }
 

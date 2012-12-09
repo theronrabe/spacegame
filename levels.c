@@ -7,6 +7,10 @@ void makeStrech(Object *obj, int X, int Y, int dX, int dY, int length) {
 	}
 }
 
+void splashScreen() {
+	createInstance(splash, 0, 0, 0, 0, 0, 0);
+}
+
 void level0() {
 	createInstance(cannon, 0, 150, 450, 0, 0, 0);
 

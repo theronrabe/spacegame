@@ -18,3 +18,8 @@ void oscIdle(Instance *this) {
 	//this->radius++;
 	//if(!(this->radius%50)) { this->radius = 0; this->A = !this->A; }
 }
+
+void splashDraw(Instance *this) {
+	drawImage(imgSplash, 400,300, 400,300, 0);
+	if(keyIsHeld(' ')) { GAME.KEYS[' '] = 0; nextLevel(); }
+}

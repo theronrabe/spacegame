@@ -1,6 +1,7 @@
 void particleCreate(Instance *this) {
-	this->scale = 10;
-	this->B = 0;
+	this->scale = rand()%10+1;
+	//this->A = (rand()%10)-5;
+	this->B = rand()%360;
 }
 
 void particleDraw(Instance *this) {
@@ -8,6 +9,7 @@ void particleDraw(Instance *this) {
 	else if(this->OBJ == particle2) drawImage(imgParticle2, this->X, this->Y, this->scale, this->scale, this->rotation);
 	else if(this->OBJ == particle3) drawImage(imgParticle3, this->X, this->Y, this->scale, this->scale, this->rotation);
 	else if(this->OBJ == particle4) drawImage(imgParticle4, this->X, this->Y, this->scale, this->scale, this->rotation);
+	else if(this->OBJ == particle5) drawImage(imgParticle5, this->X, this->Y, this->scale, this->scale, this->rotation);
 
 	this->rotation += (oscillator->A)?this->A:-this->A;
 	int oscSpeed = (int)(8*(this->scale));

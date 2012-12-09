@@ -27,7 +27,7 @@ void moveBounce(Instance *this, Instance *other) {
 		else if(other->OBJ == sizeDown) p = particle4;
 		
 		int i;
-		for(i=1;i<getInstanceSpeed(this)*10;i+=10) createInstance(p, 0, this->X, this->Y, 0, oscillator->B%360+i, 1)->A = i;
+		for(i=1;i<getInstanceSpeed(this)*10;i+=10) createInstance(p, 0, this->X, this->Y, 0, 0, 1)->A = i;
 }
 
 void pinballStep(Instance *this) {
@@ -35,7 +35,11 @@ void pinballStep(Instance *this) {
 	else if(this->X > 800) destroyInstance(this);
 	else if(this->Y > 600) destroyInstance(this);
 	else if(this->Y < 0) destroyInstance(this);
-	else if(collide(this, orb)) destroyInstance(this);
+	else if(collide(this, orb)) {
+		int i;
+		for(i=1;i<20;i++) createInstance(particle5, 0, this->X, this->Y, 0, 0, 1)->A = i;
+		destroyInstance(this);
+	}
 	else if(collide(this, antiorb)) destroyInstance(this);
 
 	this->rotation = getInstanceDirection(this);

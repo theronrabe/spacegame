@@ -1,9 +1,10 @@
 #include "gameMachine/game.h"
 
 //Objects
-Object *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc, *particle, *particle2, *particle3, *particle4;
+Object *splash, *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc, *particle, *particle2, *particle3, *particle4, *particle5;
 //Images
-GLint imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb, imgParticle, imgParticle2, imgParticle3, imgParticle4;
+GLint imgSplash, imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb, imgParticle, imgParticle2, imgParticle3, imgParticle4;
+GLint imgParticle5, imgEyeball;
 //Events
 void cannonCreate(Instance *this);
 void cannonStep(Instance *this);
@@ -41,6 +42,8 @@ void oscDraw(Instance *this);
 void particleCreate(Instance *this);
 void particleDraw(Instance *this);
 
+void splashDraw(Instance *this);
+
 //Global Data
 Instance *ball, *myBounce, *oscillator;
 int ammo = 10;
@@ -50,7 +53,7 @@ int ammo = 10;
 #include "levels.c"
 void nextLevel();
 int level = 0;
-funPtr levels[] = {level0, level1, level2, level3, level4, level5, level6, level7, level8, level9, level10};
+funPtr levels[] = {splashScreen, level0, level1, level2, level3, level4, level5, level6, level7, level8, level9, level10};
 
 
 void startGame(int argc, char **argv) {
@@ -73,6 +76,10 @@ void startGame(int argc, char **argv) {
 	particle2 = createObject();
 	particle3 = createObject();
 	particle4 = createObject();
+	particle5 = createObject();
+	splash = createObject();
+
+	splash->onDraw = splashDraw;
 	
 	cannon->onCreate = cannonCreate;
 	cannon->onStep = cannonStep;
@@ -120,6 +127,8 @@ void startGame(int argc, char **argv) {
 	particle3->onDraw = particleDraw;
 	particle4->onCreate = particleCreate;
 	particle4->onDraw = particleDraw;
+	particle5->onCreate = particleCreate;
+	particle5->onDraw = particleDraw;
 
 	imgCannon = newImage("img/ship.png");
 	imgPinball = newImage("img/rocket.png");
@@ -134,6 +143,9 @@ void startGame(int argc, char **argv) {
 	imgParticle2 = newImage("img/particle2.png");
 	imgParticle3 = newImage("img/particle3.png");
 	imgParticle4 = newImage("img/particle4.png");
+	imgParticle5 = newImage("img/particle5.png");
+	imgSplash = newImage("img/splash.png");
+	imgEyeball = newImage("img/eye.png");
 
 	
 	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);
@@ -147,6 +159,7 @@ void nextLevel() {
 	oscillator->A = 0;
 
 	if(level) {
+		wipeInstances(splash);
 		wipeInstances(cannon);
 		wipeInstances(target);
 		wipeInstances(wall);
@@ -158,6 +171,7 @@ void nextLevel() {
 	createInstance(mouse, 0, 0, 0, 0, 0, 0);
 	levels[level++]();
 }
+
 
 #include "mouse.c"
 #include "cannon.c"

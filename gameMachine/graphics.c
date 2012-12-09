@@ -95,6 +95,7 @@ void drawImage(GLuint image, int x1, int y1, int width, int height, float rotati
 }
 
 void drawImagePoints(GLuint image, int x1, int y1, int z1, int x2, int y2, int z2, float rotation) {
+	/*
 	glBindTexture(GL_TEXTURE_2D, image);
 	glPushMatrix();
 	glTranslatef(x1,y1,z1);
@@ -110,4 +111,5 @@ void drawImagePoints(GLuint image, int x1, int y1, int z1, int x2, int y2, int z
 		glVertex3i(x2-x1,0,z2-z1);
 	glEnd();
 	glPopMatrix();
+	*/
 }

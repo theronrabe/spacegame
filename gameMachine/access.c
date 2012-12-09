@@ -29,7 +29,7 @@ void createHeadInst() {
         GAME.tailInst->DATA = NULL;
         GAME.tailInst->NEXT = NULL;
 	GAME.tailInst->PREV = GAME.headInst;
-	GAME.tailInst->id = 999;
+	GAME.tailInst->id = 999999999;
 	
 	GAME.instCount = 0;
 }

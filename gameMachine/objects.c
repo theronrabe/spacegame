@@ -16,6 +16,7 @@ Object* createObject() {
 	newObj->onKeyDown = NULL;
 	newObj->onMouseLeft = NULL;
 	newObj->onMouseRight = NULL;
+ 
 	newObj->onDestroy = NULL;
 	newObj->onIdle = NULL;
 
@@ -27,6 +28,7 @@ Object* createObject() {
 Instance* createInstance(Object *obj, int dataSize, int x, int y, int z, float direction, float velocity) {
 	int size = sizeof(Instance);
 	Instance *newInst = (Instance *) malloc(sizeof(Instance));
+	if(!newInst) exit(1);
 	Instance *i = GAME.headInst, *n = GAME.headInst->NEXT;
 
 	newInst->OBJ = obj;
@@ -42,7 +44,7 @@ Instance* createInstance(Object *obj, int dataSize, int x, int y, int z, float d
 	newInst->scale = 1;
 	
 	while(i){
-		if(GAME.instCount <= i->id) {
+		if(newInst->id <= i->id) {
 			newInst->NEXT = i;
 			n = i->PREV;
 			n->NEXT = newInst;
@@ -52,6 +54,7 @@ Instance* createInstance(Object *obj, int dataSize, int x, int y, int z, float d
 		} else {
 			i = i->NEXT;
 		}
+
 	}
 	++GAME.instCount;
 	
@@ -69,6 +72,8 @@ void destroyInstance(Instance *id) {
 
 	if(id->DATA) free(id->DATA);
 	if(id) free(id);
+
+	GAME.instCount--;
 }
 
 void triggerEvent(Script (*E)(Object *obj), Instance *i) { //Takes E as a pointer to a function that returns a Script.

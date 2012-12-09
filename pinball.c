@@ -20,6 +20,14 @@ void moveBounce(Instance *this, Instance *other) {
 		else if(this->X<=other->X && this->Y>=other->Y-16 && this->Y<=other->Y+16) {
 			myBounce->rotation = 180;
 			this->xVelocity *= -0.7; this->X -= 16; } //left side
+
+		Object *p;
+		if(other->OBJ == wall) p = particle;
+		else if(other->OBJ == sizeUp) p = particle3;
+		else if(other->OBJ == sizeDown) p = particle4;
+		
+		int i;
+		for(i=1;i<getInstanceSpeed(this)*10;i+=10) createInstance(p, 0, this->X, this->Y, 0, oscillator->B%360+i, 1)->A = i;
 }
 
 void pinballStep(Instance *this) {
@@ -34,11 +42,6 @@ void pinballStep(Instance *this) {
 }
 
 void pinballDraw(Instance *this) {
-/*
-	this->X += this->xVelocity;
-	this->Y += this->yVelocity;
-*/
-
 	drawImage(imgPinball, this->X, this->Y, this->scale, this->scale, this->rotation);
 
 	if(getInstanceSpeed(this) > 15) setInstanceSpeed(this, 15);

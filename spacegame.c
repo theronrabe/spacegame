@@ -1,9 +1,9 @@
 #include "gameMachine/game.h"
 
 //Objects
-Object *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc;
+Object *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc, *particle, *particle2, *particle3, *particle4;
 //Images
-GLint imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb;
+GLint imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb, imgParticle, imgParticle2, imgParticle3, imgParticle4;
 //Events
 void cannonCreate(Instance *this);
 void cannonStep(Instance *this);
@@ -38,6 +38,9 @@ void oscCreate(Instance *this);
 void oscIdle(Instance *this);
 void oscDraw(Instance *this);
 
+void particleCreate(Instance *this);
+void particleDraw(Instance *this);
+
 //Global Data
 Instance *ball, *myBounce, *oscillator;
 int ammo = 10;
@@ -66,6 +69,10 @@ void startGame(int argc, char **argv) {
 	sizeUp = createObject();
 	sizeDown = createObject();
 	osc = createObject();
+	particle = createObject();
+	particle2 = createObject();
+	particle3 = createObject();
+	particle4 = createObject();
 	
 	cannon->onCreate = cannonCreate;
 	cannon->onStep = cannonStep;
@@ -104,26 +111,29 @@ void startGame(int argc, char **argv) {
 
 	osc->onCreate = oscCreate;
 	osc->onDraw = oscDraw;
-	osc->onIdle = oscIdle;
+
+	particle->onCreate = particleCreate;
+	particle->onDraw = particleDraw;
+	particle2->onCreate = particleCreate;
+	particle2->onDraw = particleDraw;
+	particle3->onCreate = particleCreate;
+	particle3->onDraw = particleDraw;
+	particle4->onCreate = particleCreate;
+	particle4->onDraw = particleDraw;
 
 	imgCannon = newImage("img/ship.png");
-		printf("imgCannon id\t:\t%d\n", imgCannon);
 	imgPinball = newImage("img/rocket.png");
-		printf("imgPinball id\t:\t%d\n", imgPinball);
 	imgTarget = newImage("img/target.png");
-		printf("imgTarget id\t:\t%d\n", imgTarget);
 	imgOrb = newImage("img/blackhole.png");
-		printf("imgOrb id\t:\t%d\n", imgOrb);
 	imgWall = newImage("img/wall.png");
-		printf("imgWall id\t:\t%d\n", imgWall);
 	imgSizeUp = newImage("img/circuit.png");
-		printf("imgSizeUp id\t:\t%d\n", imgSizeUp);
 	imgSizeDown = newImage("img/checker.png");
-		printf("imgSizeDown id\t:\t%d\n", imgSizeDown);
 	imgMouse = newImage("img/mouse.png");
-		printf("imgMouse id\t:\t%d\n", imgMouse);
 	imgAntiOrb = newImage("img/whitehole.png");
-		printf("imgAntiOrb id\t:\t%d\n", imgAntiOrb);
+	imgParticle = newImage("img/particle.png");
+	imgParticle2 = newImage("img/particle2.png");
+	imgParticle3 = newImage("img/particle3.png");
+	imgParticle4 = newImage("img/particle4.png");
 
 	
 	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);
@@ -157,3 +167,4 @@ void nextLevel() {
 #include "target.c"
 #include "bounce.c"
 #include "osc.c"
+#include "particle.c"

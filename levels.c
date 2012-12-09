@@ -23,7 +23,7 @@ void level1() {
 	makeStrech(wall, 16, 600-16, 32, 0, 800/32);
 	makeStrech(wall, 800-16, 16, 0, 32, 600/32);
 
-	createInstance(orb, 0, 400, 300, 0, 0, 0);
+	createInstance(orb, 0, 400, 300, 0, 0, 0)->scale = 35;
 
 	createInstance(target, 0, 150, 450, 0, 0, 0);
 }
@@ -50,7 +50,7 @@ void level3() {
 
 	int i;
 	for(i=0;i<6;i++) {
-		createInstance(sizeUp, 0, 32*(i+10), 100, 0, 0, 0)->A = 4;
+		createInstance(sizeUp, 0, 32*(i+10), 100, 0, 0, 0)->B = 3;
 	}
 
 	createInstance(orb, 0, 80, 200, 0, 0, 0);

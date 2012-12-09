@@ -8,6 +8,8 @@ void targetStep(Instance *this) {
 	Instance *other = collide(this, pinball);
 	if(other) {
 		destroyInstance(ball);
+		int i;
+		for(i=0;i<30;i++) createInstance(particle2, 0, this->X, this->Y, 0, oscillator->B%360, i)->A = i;
 		nextLevel();
 	}
 	int r;

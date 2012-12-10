@@ -57,7 +57,7 @@ void level3() {
 		createInstance(sizeUp, 0, 32*(i+10), 100, 0, 0, 0)->B = 3;
 	}
 
-	createInstance(orb, 0, 80, 200, 0, 0, 0);
+	createInstance(orb, 0, 80, 200, 0, 0, 0)->scale = 30;
 
 	createInstance(target, 0, 100, 500, 0, 0, 0);
 }
@@ -85,11 +85,11 @@ void level5() {
 	
 	createInstance(antiorb, 0, 60, 60, 0, 0, 0);
 	createInstance(antiorb, 0, 740, 200, 0, 0, 0);
-	createInstance(antiorb, 0, 60, 540, 0, 0, 0);
-	createInstance(antiorb, 0, 740, 400, 0, 0, 0);
+	createInstance(antiorb, 0, 60, 560, 0, 0, 0)->scale = 30;
+	createInstance(antiorb, 0, 746, 410, 0, 0, 0);
 	createInstance(orb, 0, 400, 300, 0, 0, 0);
 
-	createInstance(target, 0, 720, 300, 0, 0, 0);
+	createInstance(target, 0, 760, 300, 0, 0, 0);
 }
 
 void level6() {

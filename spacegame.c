@@ -2,9 +2,10 @@
 
 //Objects
 Object *splash, *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc, *particle, *particle2, *particle3, *particle4, *particle5;
+Object *particle6;
 //Images
 GLint imgSplash, imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb, imgParticle, imgParticle2, imgParticle3, imgParticle4;
-GLint imgParticle5, imgEyeball;
+GLint imgParticle5, imgEyeball, imgParticle6;
 //Events
 void cannonCreate(Instance *this);
 void cannonStep(Instance *this);
@@ -77,6 +78,7 @@ void startGame(int argc, char **argv) {
 	particle3 = createObject();
 	particle4 = createObject();
 	particle5 = createObject();
+	particle6 = createObject();
 	splash = createObject();
 
 	splash->onDraw = splashDraw;
@@ -129,6 +131,8 @@ void startGame(int argc, char **argv) {
 	particle4->onDraw = particleDraw;
 	particle5->onCreate = particleCreate;
 	particle5->onDraw = particleDraw;
+	particle6->onCreate = particleCreate;
+	particle6->onDraw = particleDraw;
 
 	imgCannon = newImage("img/ship.png");
 	imgPinball = newImage("img/rocket.png");
@@ -144,6 +148,7 @@ void startGame(int argc, char **argv) {
 	imgParticle3 = newImage("img/particle3.png");
 	imgParticle4 = newImage("img/particle4.png");
 	imgParticle5 = newImage("img/particle5.png");
+	imgParticle6 = newImage("img/particle6.png");
 	imgSplash = newImage("img/splash.png");
 	imgEyeball = newImage("img/eye.png");
 

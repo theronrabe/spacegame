@@ -8,7 +8,7 @@ void targetStep(Instance *this) {
 	if(other) {
 		destroyInstance(ball);
 		int i;
-		for(i=0;i<30;i++) createInstance(particle2, 0, this->X, this->Y, 0, oscillator->B%360, i)->A = i;
+		for(i=0;i<30;i++) createInstance(particle2, 0, this->X, this->Y, 0, 0, 0);
 		nextLevel();
 	}
 	int r;

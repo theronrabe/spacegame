@@ -105,11 +105,26 @@ void level6() {
 }
 
 void level7() {
+	createInstance(cannon,0, 60,300,0, 0,0);
+	createInstance(target,0, 740,300,0, 0,0);
 
+	createInstance(antiorb,0, 400,300,0, 0,0)->scale = 40;
+	createInstance(orb,0, 400,200,0, 0,0)->scale = 10;
+	createInstance(orb,0, 400,400,0, 0,0)->scale = 10;
+	createInstance(sizeUp,0, 400,100,0, 0,0);
+	createInstance(sizeDown,0, 400,500,0, 0,0);
 }
 
 void level8() {
+	createInstance(cannon,0, 700,100,0, 0,0);
+	createInstance(target,0, 40,100,0, 0,0);
 
+	makeStrech(wall, 0,16, 32,0, 800/32);
+	makeStrech(sizeUp, 220,150, 128,0, 4);
+	createInstance(wall,0, 100,100,0, 0,0);
+
+	createInstance(orb,0, 400,450,0, 0,0)->scale = 80;
+	createInstance(antiorb,0, 100,300,0, 0,0);
 }
 
 void level9() {

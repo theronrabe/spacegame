@@ -122,13 +122,20 @@ void level8() {
 	makeStrech(wall, 0,16, 32,0, 800/32);
 	makeStrech(sizeUp, 220,150, 128,0, 4);
 	createInstance(wall,0, 100,100,0, 0,0);
+	createInstance(wall,0, 100,80,0, 0,0);
 
 	createInstance(orb,0, 400,450,0, 0,0)->scale = 80;
 	createInstance(antiorb,0, 100,300,0, 0,0);
 }
 
 void level9() {
+	createInstance(cannon,0, 700,500,0, 0,0);
+	createInstance(target,0, 100,100,0, 0,0);
 
+	makeStrech(sizeDown, 310,500, 32,-32, 7);
+	
+	createInstance(antiorb,0, 650,180,0, 0,0);
+	createInstance(orb,0, 200,300,0, 0,0)->scale = 50;
 }
 
 void level10() {
@@ -146,6 +153,7 @@ void level10() {
 	createInstance(sizeUp, 0, 800-11*32+16, 600-32*2+16, 0, 0, 0)->A = 2;
 	createInstance(sizeUp, 0, 800-11*32+16, 600-32*3+16, 0, 0, 0)->A = 2;
 	createInstance(sizeUp, 0, 800-11*32+16, 600-32*4+16, 0, 0, 0)->A = 2;
+	createInstance(sizeUp, 0, 800-11*32+16, 600-32*5+16, 0, 0, 0)->A = 2;
 
 	createInstance(sizeDown, 0, 3*32+16, 16, 0, 0, 0);
 	createInstance(sizeDown, 0, 5*32+16, 16, 0, 0, 0);

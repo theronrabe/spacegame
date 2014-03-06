@@ -6,6 +6,7 @@ objects.c
 	as well handling the data structures used by those functions.
 */
 
+#include <game.h>
 
 Object* createObject() {
 	Object *newObj = malloc(sizeof(Object));
@@ -136,14 +137,16 @@ char instanceExists(Object *obj) {
 }
 
 Instance *nearInstance(Instance *this, Object *obj) {
-	Instance *i = GAME.headInst, *ret = i;
+	Instance *i = GAME.headInst, *ret = NULL;
 	float n=999999, in;
 
 	while(i) {
-		in = distanceSq(this->X, this->Y, i->X, i->Y);
-		if(in<n) {
-			n = in;
-			ret = i;
+		if(i->OBJ == obj) {
+			in = distanceSq(this->X, this->Y, i->X, i->Y);
+			if(in<n) {
+				n = in;
+				ret = i;
+			}
 		}
 		i = i->NEXT;
 	}

@@ -1,3 +1,6 @@
+#ifndef _objects.h_
+#define _objects.h_
+
 //Object/Instance Functions
 Object* createObject();
 Instance* createInstance(Object *obj, int dataSize, int x, int y, int z, float direction, float velocity);
@@ -35,3 +38,5 @@ typedef enum {
 	dock_1,
 	dock_0
 } Dock;
+
+#endif

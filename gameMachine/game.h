@@ -1,3 +1,6 @@
+#ifndef _game.h_
+#define _game.h_
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -47,17 +50,18 @@ typedef struct {
 } Game;
 
 //Data Declarations
-Game GAME;
-int flagDraw = 0;
+extern Game GAME;
+extern int flagDraw;
 
-#include "graphics.h"
-#include "events.h"
-#include "objects.h"
-#include "access.h"
-#include "text.h"
-#include "collisions.h"
-#include "motion.h"
+#include <graphics.h>
+#include <events.h>
+#include <objects.h>
+#include <access.h>
+#include <text.h>
+#include <collisions.h>
+#include <motion.h>
 
+/*
 #include "graphics.c"
 #include "events.c"
 #include "objects.c"
@@ -65,3 +69,6 @@ int flagDraw = 0;
 #include "text.c"
 #include "collisions.c"
 #include "motion.c"
+*/
+
+#endif

@@ -1,3 +1,5 @@
+#include "definitions.h"
+
 void mouseCreate(Instance *this) {
 	//buildPrimitive(this, 4);
 	this->scale = 10;

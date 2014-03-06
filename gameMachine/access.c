@@ -5,7 +5,7 @@ access.c
 	Contains all the getters, setters, and query functions for the framework.
 */
 
-
+#include <game.h>
 
 void setStepTime(int step) {
 	GAME.STEPTIME = step;
@@ -35,23 +35,35 @@ void createHeadInst() {
 }
 
 float getInstanceDirection(Instance *i) {
-	return atan2(i->yVelocity, i->xVelocity) * 180/PI;
+	if(i) {
+		return atan2(i->yVelocity, i->xVelocity) * 180/PI;
+	} else {
+		return -1.0;
+	}
 }
 
 void setInstanceDirection(Instance *i, float direction) {
-	i->xVelocity = cos(direction*PI/180);
-	i->yVelocity = sin(direction*PI/180);
+	if(i) {
+		i->xVelocity = cos(direction*PI/180);
+		i->yVelocity = sin(direction*PI/180);
+	}
 }
 
 float getInstanceSpeed(Instance *i) {
-	return sqrt(pow(i->xVelocity, 2) + pow(i->yVelocity, 2));
+	if(i) {
+		return sqrt(pow(i->xVelocity, 2) + pow(i->yVelocity, 2));
+	} else {
+		return -1.0;
+	}
 }
 
 void setInstanceSpeed(Instance *i, float s) {
-	float dir = getInstanceDirection(i);
-	float xC = cos(dir*PI/180);
-	float yC = sin(dir*PI/180);
+	if(i) {
+		float dir = getInstanceDirection(i);
+		float xC = cos(dir*PI/180);
+		float yC = sin(dir*PI/180);
 
-	i->xVelocity = s*xC;
-	i->yVelocity = s*yC;
+		i->xVelocity = s*xC;
+		i->yVelocity = s*yC;
+	}
 }

@@ -1,6 +1,9 @@
+#ifndef _graphics.h_
+#define _graphics.h_
+
 //Drawing Structures 
 struct _VERTEX { float x,y,s,t; };
-struct _VERTEX _PRIM[] = {-1,-1,0,0, 1,-1,1,0, 1,1,1,1, -1,1,0,1};
+extern struct _VERTEX _PRIM[];
 GLuint _VAO[2], _VBO[2];
 GLint _SAMPLER_LOC;
 
@@ -15,3 +18,5 @@ void drawImage(GLuint Image, int x1, int y1, int width, int height, float rotati
 void drawImagePoints(GLuint Image, int x1, int y1, int z1, int x2, int y2, int z2, float rotation);
 void buildPrimitive();
 GLuint newImage(char *file);
+
+#endif

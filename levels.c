@@ -1,3 +1,5 @@
+#include <definitions.h>
+
 void makeStrech(Object *obj, int X, int Y, int dX, int dY, int length) {
 	int i;
 	for(i=0;i<length;i++) {
@@ -9,6 +11,7 @@ void makeStrech(Object *obj, int X, int Y, int dX, int dY, int length) {
 
 void splashScreen() {
 	createInstance(splash, 0, 0, 0, 0, 0, 0);
+	level = 1;
 }
 
 void level0() {
@@ -19,6 +22,13 @@ void level0() {
 	makeStrech(wall, 16, 600-16, 32, 0, 800/32);
 
 	createInstance(target, 0, 700, 300, 0, 0, 0);
+
+	int i,j;
+	for(i=0; i<800; i+=64) {
+		for(j=0; j<600; j+=64) {
+			createInstance(grid, 0, i, j, 0, 0, 0);
+		}
+	}
 }
 
 void level1() {
@@ -43,6 +53,10 @@ void level2() {
 	createInstance(orb, 0, 32*5+16, 300+16, 0, 0, 0)->scale = 25;
 	createInstance(orb, 0, 32*16+16, 500, 0, 0, 0)->scale = 10;
 
+	createInstance(resetWall, 0, 10*32+16, 5*32+16, 0, 0, 0);
+	createInstance(resetWall, 0, 11*32+16, 5*32+16, 0, 0, 0);
+	createInstance(resetWall,0, 20*32+16, 14*32+16, 0, 0, 0);
+
 	createInstance(target, 0, 700, 80, 0, 0, 0);
 }
 
@@ -58,6 +72,8 @@ void level3() {
 	}
 
 	createInstance(orb, 0, 80, 200, 0, 0, 0)->scale = 30;
+
+	createInstance(resetWall, 0, 32*19+16, 32*5+16, 0, 0, 0);
 
 	createInstance(target, 0, 100, 500, 0, 0, 0);
 }
@@ -89,6 +105,9 @@ void level5() {
 	createInstance(antiorb, 0, 746, 410, 0, 0, 0);
 	createInstance(orb, 0, 400, 300, 0, 0, 0);
 
+	createInstance(resetWall,0, 500,150,0, 0,0);
+	createInstance(reset2Wall,0, 500,450,0, 0,0);
+
 	createInstance(target, 0, 760, 300, 0, 0, 0);
 }
 
@@ -113,6 +132,8 @@ void level7() {
 	createInstance(orb,0, 400,400,0, 0,0)->scale = 10;
 	createInstance(sizeUp,0, 400,100,0, 0,0);
 	createInstance(sizeDown,0, 400,500,0, 0,0);
+
+	createInstance(reset2Wall,0, 700,250,0, 0,0);
 }
 
 void level8() {

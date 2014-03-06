@@ -5,6 +5,7 @@ events.c
 	Contains all the event functions for the framework that can be bound to user-defined scripts.
 */
 
+#include <game.h>
 
 int main(int argc, char **argv) {
 	//Graphics Stuff

@@ -1,10 +1,14 @@
+#include <definitions.h>
+
 void oscCreate(Instance *this) {
 	this->radius = 0;
 	this->B = 0;
+
 }
 
 void oscDraw(Instance *this) {
-	glClearColor(0,0.01,0.08,1);
+	//glClearColor(abs(this->radius-25)/500.0,0.01,0.08,1);
+	glClearColor(10.0/this->C, 0.02, 0.25, 1); //abs(this->B%1000-500)/2000.0, 1);
 	seeWorld2D(0,0,800,600);
 
 	this->radius++;

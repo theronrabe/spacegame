@@ -1,61 +1,8 @@
-#include "gameMachine/game.h"
+#include <definitions.h>
 
-//Objects
-Object *splash, *cannon, *pinball, *target, *orb, *antiorb, *mouse, *wall, *bounce, *sizeUp, *sizeDown, *osc, *particle, *particle2, *particle3, *particle4, *particle5;
-Object *particle6;
-//Images
-GLint imgSplash, imgCannon, imgPinball, imgTarget, imgOrb, imgMouse, imgWall, imgSizeUp, imgSizeDown, imgAntiOrb, imgParticle, imgParticle2, imgParticle3, imgParticle4;
-GLint imgParticle5, imgEyeball, imgParticle6;
-//Events
-void cannonCreate(Instance *this);
-void cannonStep(Instance *this);
-void cannonDraw(Instance *this);
-void cannonMouse(Instance *this);
-
-void pinballCreate(Instance *this);
-void pinballStep(Instance *this);
-void pinballDraw(Instance *this);
-
-void targetCreate(Instance *this);
-void targetStep(Instance *this);
-void targetDraw(Instance *this);
-
-void orbCreate(Instance *this);
-void orbStep(Instance *this);
-void orbDraw(Instance *this);
-
-void antiorbCreate(Instance *this);
-
-void mouseCreate(Instance *this);
-void mouseStep(Instance *this);
-void mouseDraw(Instance *this);
-
-void wallCreate(Instance *this);
-void wallDraw(Instance *this);
-
-void bounceCreate(Instance *this);
-void bounceDraw(Instance *this);
-
-void oscCreate(Instance *this);
-void oscIdle(Instance *this);
-void oscDraw(Instance *this);
-
-void particleCreate(Instance *this);
-void particleDraw(Instance *this);
-
-void splashDraw(Instance *this);
-
-//Global Data
-Instance *ball, *myBounce, *oscillator;
-int ammo = 10;
-
-//SpaceGame globals
-//Levels
-#include "levels.c"
-void nextLevel();
 int level = 0;
-funPtr levels[] = {splashScreen, level0, level1, level2, level3, level4, level5, level6, level7, level8, level9, level10};
-
+funPtr levels[] = {splashScreen, level0, level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, splashScreen};
+int ammo = 10;
 
 void startGame(int argc, char **argv) {
 	GAME.STEPTIME = 100;
@@ -80,6 +27,11 @@ void startGame(int argc, char **argv) {
 	particle5 = createObject();
 	particle6 = createObject();
 	splash = createObject();
+	grid = createObject();
+	resetWall = createObject();
+	resetParticle = createObject();
+	reset2Wall = createObject();
+	reset2Particle = createObject();
 
 	splash->onDraw = splashDraw;
 	
@@ -91,6 +43,7 @@ void startGame(int argc, char **argv) {
 	pinball->onCreate = pinballCreate;
 	pinball->onStep = pinballStep;
 	pinball->onDraw = pinballDraw;
+	pinball->onDestroy = pinballDestroy;
 
 	target->onCreate = targetCreate;
 	target->onStep = targetStep;
@@ -115,6 +68,12 @@ void startGame(int argc, char **argv) {
 	sizeDown->onCreate = wallCreate;
 	sizeDown->onDraw = wallDraw;
 
+	resetWall->onCreate = wallCreate;
+	resetWall->onDraw = wallDraw;
+
+	reset2Wall->onCreate = wallCreate;
+	reset2Wall->onDraw = wallDraw;
+
 	bounce->onCreate = bounceCreate;
 	bounce->onDraw = bounceDraw;
 
@@ -134,6 +93,19 @@ void startGame(int argc, char **argv) {
 	particle6->onCreate = particleCreate;
 	particle6->onDraw = particleDraw;
 
+	resetParticle->onCreate = gridCreate;
+	resetParticle->onStep = gridStep;
+	resetParticle->onDraw = gridDraw;
+
+	reset2Particle->onCreate = gridCreate;
+	reset2Particle->onStep = gridStep;
+	reset2Particle->onDraw = gridDraw;
+
+	grid->onCreate = gridCreate;
+	grid->onStep = gridStep;
+	grid->onDraw = gridDraw;
+	grid->onDestroy = gridDestroy;
+
 	imgCannon = newImage("img/ship.png");
 	imgPinball = newImage("img/rocket.png");
 	imgTarget = newImage("img/target.png");
@@ -151,7 +123,11 @@ void startGame(int argc, char **argv) {
 	imgParticle6 = newImage("img/particle6.png");
 	imgSplash = newImage("img/splash.png");
 	imgEyeball = newImage("img/eye.png");
-
+	imgSquare = newImage("img/square.png");
+	imgResetWall = newImage("img/resetWall.png");
+	imgResetParticle = newImage("img/resetParticle.png");
+	imgReset2Wall = newImage("img/reset2Wall.png");
+	imgReset2Particle = newImage("img/reset2Particle.png");
 	
 	oscillator = createInstance(osc, 0, 0, 0, 0, 0, 0);
 	nextLevel();
@@ -172,18 +148,10 @@ void nextLevel() {
 		wipeInstances(antiorb);
 		wipeInstances(sizeUp);
 		wipeInstances(sizeDown);
+		wipeInstances(resetWall);
+		wipeInstances(reset2Wall);
 	}
 	createInstance(mouse, 0, 0, 0, 0, 0, 0);
+
 	levels[level++]();
 }
-
-
-#include "mouse.c"
-#include "cannon.c"
-#include "orb.c"
-#include "pinball.c"
-#include "wall.c"
-#include "target.c"
-#include "bounce.c"
-#include "osc.c"
-#include "particle.c"

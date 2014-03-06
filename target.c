@@ -1,3 +1,5 @@
+#include <definitions.h>
+
 void targetCreate(Instance *this) {
 	this->scale = 20;
 	this->radius = 50;
@@ -13,9 +15,15 @@ void targetStep(Instance *this) {
 	}
 	int r;
 	if(ball) {
-		r = direction(this->X, this->Y, ball->X, ball->Y);
+		if(ball->OBJ == pinball) {
+			r = direction(this->X, this->Y, ball->X, ball->Y);
+			oscillator->C = distance(this->X, this->Y, ball->X, ball->Y);
+		} else {
+			r = direction(this->X, this->Y, GAME.mouseX, GAME.mouseY);
+		}
 	} else {
 		r = direction(this->X, this->Y, GAME.mouseX, GAME.mouseY);
+		oscillator->C = 999999;
 	}
 	this->rotation = r;
 }

@@ -1,3 +1,5 @@
+#include <definitions.h>
+
 void cannonCreate(Instance *this) {
 	//buildPrimitive(this, 6);
 	this->scale = 2;

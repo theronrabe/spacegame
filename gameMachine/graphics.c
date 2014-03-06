@@ -4,6 +4,10 @@ Theron Rabe
 graphics.c
 	This file takes defines any functions that either interact with OpenGL, or user-oriented graphics functions.
 */
+
+#include <game.h>
+
+struct _VERTEX _PRIM[] = {-1,-1,0,0, 1,-1,1,0, 1,1,1,1, -1,1,0,1};
 GLuint _V,_F,_P;
 
 void loadShaders(char *vertShader, char *fragShader) {

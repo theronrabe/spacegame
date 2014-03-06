@@ -1,8 +1,15 @@
+#include "definitions.h"
+
 void particleCreate(Instance *this) {
 	if(this->OBJ == particle6) {
-		this->scale = getInstanceSpeed(ball);
+		if(ball) {
+			this->scale = getInstanceSpeed(ball);
+			this->rotation = ball->rotation;
+		} else {
+			this->scale = 5;
+			this->rotation = oscillator->B;
+		}
 		if(this->scale > 8) this->scale = 8;
-		this->rotation = ball->rotation;
 	} else if(this->OBJ == particle) {
 		this->scale = rand()%7+1;
 		this->A = (rand()%30)+1;

@@ -1,3 +1,5 @@
+#include <game.h>
+
 void bounceCreate(Instance *this) {
 	//buildPrimitive(this, 6);
 }

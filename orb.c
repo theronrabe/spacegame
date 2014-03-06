@@ -1,3 +1,5 @@
+#include <definitions.h>
+
 void orbCreate(Instance *this) {
 	//buildPrimitive(this, 6);
 	this->scale = 10;
@@ -29,9 +31,15 @@ void orbDraw(Instance *this) {
 			ball->yVelocity += (ball->Y > this->Y)?-grav:grav;
 		}
 	}
+
 	if(this->C) {
 		drawImage(imgAntiOrb, this->X, this->Y, this->scale*2, this->scale*2, 0);
 	} else {
 		drawImage(imgOrb, this->X, this->Y, this->scale*2, this->scale*2, 0);
+	}
+
+	if(this->scale < 0) {
+		this->C = !this->C;
+		this->scale *= -1;
 	}
 }
